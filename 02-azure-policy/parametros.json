@@ -1,0 +1,11 @@
+{
+  "efecto": {
+    "type": "String",
+    "metadata": {
+      "displayName": "Efecto",
+      "description": "Audit: solo informa. Deny: bloquea. Disabled: desactivada."
+    },
+    "allowedValues": ["Audit", "Deny", "Disabled"],
+    "defaultValue": "Audit"
+  }
+}

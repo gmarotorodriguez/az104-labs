@@ -1,0 +1,9 @@
+{
+  "if": {
+    "field": "tags['entorno']",
+    "exists": "false"
+  },
+  "then": {
+    "effect": "[parameters('efecto')]"
+  }
+}
