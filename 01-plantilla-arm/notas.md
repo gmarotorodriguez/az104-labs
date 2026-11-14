@@ -10,14 +10,14 @@ Fecha: 1 de octubre de 2026. Herramienta: Azure Cloud Shell (Bash), en lugar de 
 
 ## Pasos
 1. Crear el grupo de recursos y dejarlo por defecto:
-   `az group create --name rg-lab02 --location spaincentral`
-   `az configure --defaults group="rg-lab02"`
+   `az group create --name rg-lab01 --location spaincentral`
+   `az configure --defaults group="rg-lab01"`
 2. Desplegar la plantilla vacía, luego con la cuenta, luego con parámetros y salida:
    `az deployment group create --name <nombre> --template-file azuredeploy.json --parameters storageName=<nombre>`
 3. Revisar cada despliegue en el portal: grupo de recursos → Implementaciones.
 4. Ver solo las salidas:
    `az deployment group show --name <nombre> --query properties.outputs`
-5. Borrar todo: `az group delete --name rg-lab02 --yes --no-wait`
+5. Borrar todo: `az group delete --name rg-lab01 --yes --no-wait`
 
 ## Errores y cómo se resolvieron
 - **InvalidTemplate** al pasar `storageSKU=Premium_LRS`: el valor no estaba en `allowedValues`. La plantilla se valida antes de crear nada.
