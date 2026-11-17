@@ -1,0 +1,16 @@
+[
+  {
+    "policyDefinitionReferenceId": "ubicaciones",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c",
+    "parameters": {
+      "listOfAllowedLocations": { "value": "[parameters('regionesPermitidas')]" }
+    }
+  },
+  {
+    "policyDefinitionReferenceId": "etiquetaEntorno",
+    "policyDefinitionId": "/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/policyDefinitions/exigir-etiqueta-entorno",
+    "parameters": {
+      "efecto": { "value": "[parameters('efectoEtiqueta')]" }
+    }
+  }
+]

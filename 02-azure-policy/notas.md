@@ -67,3 +67,41 @@ az role assignment list --scope $RG_ID -o table
 - Identidad del sistema: se crea y se borra con la asignación. Del usuario: reutilizable entre varias.
 - Una identidad administrada aparece en RBAC como **ServicePrincipal**.
 - Se heredan RBAC, Policy y bloqueos; las **etiquetas no**.
+
+## Bloque 3: iniciativa, exención y limpieza
+
+### Qué se hizo
+1. **Iniciativa** `gobernanza-basica` (`iniciativa.json` + `iniciativa-parametros.json`) que agrupa *Allowed locations* y la directiva personalizada de etiqueta, con parámetros propios que pasan a cada directiva.
+2. Sustituidas las dos asignaciones sueltas por **una sola asignación de la iniciativa**.
+3. Prueba Modify + Deny: recurso creado sin etiqueta → Modify la añade antes de que Deny evalúe → se crea sin error.
+4. **Exención** (categoría Waiver, con caducidad) de un recurso, solo para la directiva de etiqueta (`policyDefinitionReferenceId`).
+5. Al borrar la asignación con identidad del sistema, la identidad desaparece pero la **asignación de rol queda huérfana**.
+6. Limpieza: grupo de recursos (arrastra asignaciones, exención y roles del RG) → iniciativa → definición personalizada.
+
+### Comandos clave
+```bash
+SUB_ID=$(az account show --query id -o tsv)
+sed "s|<SUBSCRIPTION_ID>|$SUB_ID|" iniciativa.json > ~/iniciativa-real.json   # fuera del repo
+
+az policy set-definition create --name gobernanza-basica \
+  --definitions ~/iniciativa-real.json --params iniciativa-parametros.json
+
+az policy assignment create --name gobernanza \
+  --policy-set-definition gobernanza-basica --scope $RG_ID \
+  --params '{"regionesPermitidas":{"value":["spaincentral"]},"efectoEtiqueta":{"value":"Deny"}}'
+
+az policy exemption create --name exencion-etiqueta \
+  --policy-assignment $ASIG_ID --policy-definition-reference-ids etiquetaEntorno \
+  --scope $ST_ID --exemption-category Waiver --expires-on 2026-12-31T23:59:59Z
+
+az group delete --name rg-policy-lab --yes --no-wait
+az policy set-definition delete --name gobernanza-basica
+az policy definition delete --name exigir-etiqueta-entorno
+```
+
+### Lecciones
+- **Directiva** = una regla; **iniciativa** = caja de directivas; **asignación** = aplicarlas a un ámbito con parámetros.
+- Orden de evaluación: Disabled → Append/Modify → Deny → Audit; después AuditIfNotExists/DeployIfNotExists.
+- **Exención** (objeto aparte, aparece como "Exento", con motivo Waiver/Mitigated y caducidad) ≠ **exclusión** (en la asignación, el recurso ni se evalúa).
+- Borrar una asignación con identidad puede dejar **asignaciones de rol huérfanas**: hay que limpiarlas.
+- Las definiciones viven en la suscripción: no se borran con el grupo de recursos. Primero la iniciativa, luego la definición.

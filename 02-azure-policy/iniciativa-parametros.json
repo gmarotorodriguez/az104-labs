@@ -1,0 +1,13 @@
+{
+  "regionesPermitidas": {
+    "type": "Array",
+    "metadata": { "displayName": "Regiones permitidas" },
+    "defaultValue": ["spaincentral"]
+  },
+  "efectoEtiqueta": {
+    "type": "String",
+    "metadata": { "displayName": "Efecto de la directiva de etiqueta" },
+    "allowedValues": ["Audit", "Deny", "Disabled"],
+    "defaultValue": "Deny"
+  }
+}
