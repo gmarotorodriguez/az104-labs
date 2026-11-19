@@ -5,8 +5,11 @@ Laboratorios prácticos de preparación del examen Microsoft AZ-104 (Azure Admin
 ## Laboratorios
 
 | # | Laboratorio | Contenido |
-|---|-------------|-----------|
+|---|---|---|
 | 01 | [Plantilla ARM](01-plantilla-arm) | Cuenta de almacenamiento con parámetros y salidas, desplegada desde Azure Cloud Shell |
-| 02 | [Azure Policy](02-azure-policy) | Ubicaciones permitidas y directiva personalizada de etiqueta obligatoria (Audit y Deny) |
+| 02 | [Azure Policy](02-azure-policy) | Ubicaciones permitidas, directiva personalizada de etiqueta (Audit y Deny), efecto Modify con tarea de corrección e identidad administrada, iniciativa, exención y limpieza |
+| 03 | [Redes virtuales](03-redes-virtuales) | Hub-and-spoke con Bicep: dos VNets, subredes y peering en los dos sentidos, con what-if previo |
+| 04 | [NSG](04-nsg) | Grupos de seguridad de red: reglas predeterminadas, RDP solo desde mi IP, denegar salida a Internet y comportamiento con estado |
+| 05 | [Azure DNS](05-dns) | Zona pública con registro A y comprobación con nslookup; zona privada con vínculo de red y registro automático de VMs |
 
 Repositorio en curso: añado laboratorios a medida que avanzo en el temario.
