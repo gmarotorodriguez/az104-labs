@@ -5,7 +5,7 @@ set -e
 
 RG=az104-05-rg1
 REGION1=spaincentral
-REGION2=switzerlandnorth          # pon aquí la segunda región permitida, si la hay
+REGION2=polandcentral         # Switzerland North sin capacidad para B-series ese día
 SIZE=Standard_B2ats_v2        # si falla por capacidad: Standard_B2s_v2
 
 echo ">> Grupo de recursos"
@@ -21,7 +21,7 @@ crear() {   # $1=num  $2=región  $3=prefijo VNet  $4=prefijo subred
     --admin-username azureuser --generate-ssh-keys -o none
 }
 
-# crear 0 $REGION1 10.50.0.0/22 10.50.0.0/24
+crear 0 $REGION1 10.50.0.0/22 10.50.0.0/24
 crear 1 $REGION1 10.51.0.0/22 10.51.0.0/24
 crear 2 $REGION2 10.52.0.0/22 10.52.0.0/24
 
