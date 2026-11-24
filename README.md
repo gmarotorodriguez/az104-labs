@@ -13,5 +13,6 @@ Laboratorios prácticos de preparación del examen Microsoft AZ-104 (Azure Admin
 | 05 | [Azure DNS](05-dns) | Zona pública con registro A y comprobación con nslookup; zona privada con vínculo de red y registro automático de VMs |
 | 06 | [Alias DNS + Load Balancer](06-dns-alias) | Script con Load Balancer Standard, dos VMs con nginx (cloud-init) y registro de alias en el vértice de la zona |
 | 07 | [Conectividad entre sitios](07-conectividad-sitios) | Tres VNets en dos regiones, peering regional y global, Network Watcher, Ejecutar comando y ruta personalizada (UDR) |
+| 08 | [Rutas y NVA](08-rutas-nva) | Tabla de rutas con UDR hacia una NVA en la DMZ, reenvío IP en NIC y Linux, traceroute y enrutamiento asimétrico |
 
 Repositorio en curso: añado laboratorios a medida que avanzo en el temario.
